@@ -1,73 +1,95 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>csv2rdf</groupId>
-  <artifactId>csv2rdf</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>csv2rdf</name>
-  <build>
-    <sourceDirectory>src</sourceDirectory>
-    <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-  <repositories>
-  <!--https://clojars.org -->
-<repository>
-  <id>clojars.org</id>
-  <url>https://repo.clojars.org</url>
-</repository>
-    <repository>
-        <id>mulesoft-public</id>
-        <name>MuleSoft Public Repository</name>
-        <url>https://repository.mulesoft.org/nexus/content/repositories/public/</url>
-        <layout>default</layout>
-    </repository>
-  </repositories>
-  <dependencies>
-<!-- https://mvnrepository.com/artifact/io.airlift/command -->
-<dependency>
-  <groupId>io.airlift</groupId>
-  <artifactId>command</artifactId>
-  <version>0.3</version>
-</dependency>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>csv2rdf</groupId>
+	<artifactId>csv2rdf</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>csv2rdf</name>
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.1</version>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/lib</outputDirectory>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>false</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<repositories>
+		<!--https://clojars.org -->
+		<repository>
+			<id>clojars.org</id>
+			<url>https://repo.clojars.org</url>
+		</repository>
+		<repository>
+			<id>mulesoft-public</id>
+			<name>MuleSoft Public Repository</name>
+			<url>https://repository.mulesoft.org/nexus/content/repositories/public/</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/io.airlift/command -->
+		<dependency>
+			<groupId>io.airlift</groupId>
+			<artifactId>command</artifactId>
+			<version>0.3</version>
+		</dependency>
 
-<!-- https://mvnrepository.com/artifact/org.openrdf/rio -->
-<dependency>
-    <groupId>org.openrdf</groupId>
-    <artifactId>rio</artifactId>
-    <version>1.0.10</version>
-</dependency>
+		<!-- https://mvnrepository.com/artifact/org.openrdf/rio -->
+		<dependency>
+			<groupId>org.openrdf</groupId>
+			<artifactId>rio</artifactId>
+			<version>1.0.10</version>
+		</dependency>
 
-	<dependency>
-    <groupId>org.openrdf</groupId>
-    <artifactId>openrdf-model</artifactId>
-    <version>1.2.7</version>
-</dependency>
-<dependency>
-   <groupId>com.google.guava</groupId>
-   <artifactId>guava</artifactId>
-   <version>18.0</version>
-</dependency>
-<!-- https://mvnrepository.com/artifact/soap/soap -->
-<dependency>
-    <groupId>soap</groupId>
-    <artifactId>soap</artifactId>
-    <version>2.3.1</version>
-</dependency>
+		<dependency>
+			<groupId>org.openrdf</groupId>
+			<artifactId>openrdf-model</artifactId>
+			<version>1.2.7</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>18.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/soap/soap -->
+		<dependency>
+			<groupId>soap</groupId>
+			<artifactId>soap</artifactId>
+			<version>2.3.1</version>
+		</dependency>
 
-<!-- https://mvnrepository.com/artifact/org.openrdf/sesame-onejar -->
-<!-- https://mvnrepository.com/artifact/org.openrdf.sesame/openrdf-sesame-onejar -->
-<dependency>
-    <groupId>org.openrdf.sesame</groupId>
-    <artifactId>openrdf-sesame-onejar</artifactId>
-    <version>2.4.2</version>
-</dependency>
-  </dependencies>
+		<!-- https://mvnrepository.com/artifact/org.openrdf/sesame-onejar -->
+		<!-- https://mvnrepository.com/artifact/org.openrdf.sesame/openrdf-sesame-onejar -->
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>openrdf-sesame-onejar</artifactId>
+			<version>2.4.2</version>
+		</dependency>
+	</dependencies>
 </project>
