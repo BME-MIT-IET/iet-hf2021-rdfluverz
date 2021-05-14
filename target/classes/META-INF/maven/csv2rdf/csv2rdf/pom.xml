@@ -25,11 +25,11 @@
   <version>0.3</version>
 </dependency>
 
-<!-- https://mvnrepository.com/artifact/org.openrdf/rio -->
+<!-- https://mvnrepository.com/artifact/org.openrdf.sesame/sesame-rio-api -->
 <dependency>
-    <groupId>org.openrdf</groupId>
-    <artifactId>rio</artifactId>
-    <version>1.0.10</version>
+    <groupId>org.openrdf.sesame</groupId>
+    <artifactId>sesame-rio-api</artifactId>
+    <version>4.1.2</version>
 </dependency>
 
 	<dependency>
