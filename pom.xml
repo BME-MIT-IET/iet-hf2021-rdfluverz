@@ -17,4 +17,13 @@
       </plugin>
     </plugins>
   </build>
+  <dependencies>
+<!-- https://mvnrepository.com/artifact/io.airlift/command -->
+<dependency>
+    <groupId>io.airlift</groupId>
+    <artifactId>command</artifactId>
+    <version>0.3</version>
+    <scope>test</scope>
+	</dependency>
+  </dependencies>
 </project>
