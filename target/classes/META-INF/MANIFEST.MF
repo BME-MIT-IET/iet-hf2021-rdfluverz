@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
-Built-By: Kinga
-Build-Jdk: 1.8.0_231
+Class-Path: lib/command-0.3.jar lib/units-1.0.jar lib/jsr305-3.0.2.jar
+  lib/sesame-rio-api-4.1.2.jar lib/sesame-model-4.1.2.jar lib/sesame-u
+ til-4.1.2.jar lib/slf4j-api-1.7.10.jar lib/openrdf-model-1.2.7.jar li
+ b/sesame-1.2.7.jar lib/openrdf-util-1.2.7.jar lib/commons-fileupload-
+ 1.2.jar lib/rio-1.0.10.jar lib/soap-2.3.1.jar lib/guava-18.0.jar
+Build-Jdk-Spec: 1.8
 Created-By: Maven Integration for Eclipse
+Main-Class: com.complexible.common.csv.CSV2RDF
 
