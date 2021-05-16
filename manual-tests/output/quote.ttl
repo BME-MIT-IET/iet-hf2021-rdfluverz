@@ -1,0 +1,53 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@prefix vso: <http://purl.org/vso/ns#> .
+@prefix : <http://example.org/cars#> .
+
+:Manufacturer-Ford a gr:BusinessEntity ;
+	rdfs:label "Ford" .
+
+:Model-e4v61spgp70791ce77bv3n0ethjdr0fp a gr:ProductOrServiceModel ;
+	rdfs:label "Ford E350" ;
+	gr:hasManufacturer :Manufacturer-Ford .
+
+:Car-1 a vso:Automobile , gr:ActualProductOrServiceInstance ;
+	rdfs:label "Ford E350 (1997)" ;
+	gr:hasManufacturer :Manufacturer-a6nc5cg6lagnauhqlkticpfsmaon1c5g ;
+	gr:hasMakeAndModel :Model-e4v61spgp70791ce77bv3n0ethjdr0fp ;
+	vso:modelDate "1997-01-01"^^xsd:date .
+
+:Offer-1e2aaiceop5eah151218andi115fig16 a gr:Offering ;
+	rdfs:comment "ac, abs, moon" ;
+	gr:includes :Car-1 ;
+	gr:hasBusinessFunction gr:Sell ;
+	gr:hasPriceSpecification _:node1f5qiq8fsx1 .
+
+_:node1f5qiq8fsx1 a gr:UnitPriceSpecification ;
+	gr:hasCurrency "USD"^^xsd:string ;
+	gr:hasCurrencyValue "3000.00"^^xsd:float .
+
+:Manufacturer-Chevy a gr:BusinessEntity ;
+	rdfs:label "Chevy" .
+
+:Model-mbvb602k2eh76po2rgk2r0um6unb18f6 a gr:ProductOrServiceModel ;
+	rdfs:label "Chevy Venture \"Extended Edition\"" ;
+	gr:hasManufacturer :Manufacturer-Chevy .
+
+:Car-2 a vso:Automobile , gr:ActualProductOrServiceInstance ;
+	rdfs:label "Chevy Venture \"Extended Edition\" (1999)" ;
+	gr:hasManufacturer :Manufacturer-26hg472sj19jjuejvno5v3amimb8i6bv ;
+	gr:hasMakeAndModel :Model-mbvb602k2eh76po2rgk2r0um6unb18f6 ;
+	vso:modelDate "1999-01-01"^^xsd:date .
+
+:Offer-r5f18c5gcn0r5o608tvq1k9d1a8nc2k4 a gr:Offering ;
+	rdfs:comment "507bbfa7-b822-4c92-a461-5473c1f4652e" ;
+	gr:includes :Car-2 ;
+	gr:hasBusinessFunction gr:Sell ;
+	gr:hasPriceSpecification _:node1f5qiq8fsx2 .
+
+_:node1f5qiq8fsx2 a gr:UnitPriceSpecification ;
+	gr:hasCurrency "USD"^^xsd:string ;
+	gr:hasCurrencyValue "4900.00"^^xsd:float .
