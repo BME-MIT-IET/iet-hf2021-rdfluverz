@@ -3,9 +3,10 @@
 package com.complexible.common.csv;
 
 import au.com.bytecode.opencsv.CSVReader;
-import com.google.common.base.Charsets;
+import java.nio.charset.StandardCharsets;
 import com.google.common.base.Preconditions;
 import com.google.common.io.Files;
+
 import io.airlift.command.*;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFWriter;
@@ -17,6 +18,8 @@ import java.io.Writer;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Converts a CSV file to RDF based on a given template
@@ -26,7 +29,7 @@ import java.util.List;
 @Command(name = "convert", description = "Runs the conversion.")
 public class CSV2RDF implements Runnable {
     private static final Charset INPUT_CHARSET = Charset.defaultCharset();
-    private static final Charset OUTPUT_CHARSET = Charsets.UTF_8;
+    private static final Charset OUTPUT_CHARSET = StandardCharsets.UTF_8;
 
     @Option(name = "--no-header", arity = 0, description = "If csv file does not contain a header row")
     boolean noHeader = false;
@@ -43,6 +46,8 @@ public class CSV2RDF implements Runnable {
     @Arguments(required = true, description = "File arguments. The extension of template file and output file determines the RDF format that will be used for them (.ttl = Turtle, .nt = N-Triples, .rdf = RDF/XML)", title = {
             "templateFile", "csvFile", "outputFile"})
     public List<String> files;
+    
+    private static Logger logger = Logger.getLogger(CSV2RDF.class.getName());
 
     public void run() {
         Preconditions.checkArgument(files.size() >= 3, "Missing arguments");
@@ -51,10 +56,10 @@ public class CSV2RDF implements Runnable {
         File templateFile = new File(files.get(0));
         File inputFile = new File(files.get(1));
         File outputFile = new File(files.get(2));
-        System.out.println("CSV to RDF conversion started...");
-        System.out.println("Template: " + templateFile);
-        System.out.println("Input   : " + inputFile);
-        System.out.println("Output  : " + outputFile);
+        logger.log(Level.INFO, "CSV to RDF conversion started...");
+        logger.log(Level.INFO, "Template: {0}", templateFile);
+        logger.log(Level.INFO, "Input   : {0}", inputFile);
+        logger.log(Level.INFO, "Output  : {0}", outputFile);
 
         int inputRows;
         int outputTriples;
@@ -91,7 +96,7 @@ public class CSV2RDF implements Runnable {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        System.out.printf("Converted %,d rows to %,d triples%n", inputRows, outputTriples);
+        logger.log(Level.INFO, "Converted {0} rows to {1} triples%n", new Object[] { inputRows, outputTriples});
     }
 
     public static char toChar(String value) {
@@ -105,7 +110,7 @@ public class CSV2RDF implements Runnable {
                     .withDefaultCommand(CSV2RDF.class).withCommand(CSV2RDF.class).withCommand(Help.class)
                     .build().parse(args).run();
         } catch (Exception e) {
-            System.err.println("ERROR: " + e.getMessage());
+            logger.log(Level.SEVERE, "ERROR: {0}", e.getMessage());
             e.printStackTrace();
         }
     }

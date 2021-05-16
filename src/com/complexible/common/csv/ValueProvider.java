@@ -1,6 +1,6 @@
 package com.complexible.common.csv;
 
-import com.google.common.base.Charsets;
+import java.nio.charset.StandardCharsets;
 import com.google.common.hash.HashCode;
 import com.google.common.hash.Hashing;
 import com.google.common.io.BaseEncoding;
@@ -9,7 +9,7 @@ import java.nio.charset.Charset;
 import java.util.UUID;
 
 public abstract class ValueProvider {
-    private static final Charset OUTPUT_CHARSET = Charsets.UTF_8;
+    private static final Charset OUTPUT_CHARSET = StandardCharsets.UTF_8;
 
     public final String placeholder = UUID.randomUUID().toString();
     public boolean isHash;
