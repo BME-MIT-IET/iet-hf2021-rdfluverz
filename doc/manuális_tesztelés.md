@@ -24,6 +24,7 @@ Kiadott parancs:
 
     java -jar dist/lib/csv2rdf.jar manual-tests/template/cars-template.ttl manual-tests/input/empty.csv empty.ttl
 
+![](manualis_teszteles/empty-input.png)
 
 ## Nemlétező input file teszt
 
