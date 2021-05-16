@@ -132,6 +132,7 @@ Kiadott parancs:
 
     java -jar dist/lib/csv2rdf.jar manual-tests/template/cars-template.ttl manual-tests/input/separator.csv separator.ttl -s ;
 
+
 ## Quote karakter teszt
 A program alapértelmezett quote karakter a `"` ezért, mi `!`-t használtunk, megfelelően kezelte.
 
@@ -142,4 +143,16 @@ Kiadott parancs:
      java -jar dist/lib/csv2rdf.jar manual-tests/template/cars-template.ttl manual-tests/input/quote.csv quote.ttl --quote !
 
 
+## No Header input teszt
+A program alapértelmezetten azt várja, hogy az input file első sorában `header` van. Amennyiben rögtön az adattal kezdődik az input, akkor futtatási opciónak meg kell adni a `--no-header` -t. Ilyenkor a template-ben a változókat név helyett index-el lehet lekérni.
+A funkció jól működik, sikeresen létrehozta az outputot.
 
+Input: `cars-no-header.csv`
+Template: `template-no-haeder.ttl`
+Output: `result-no-header.ttl`
+
+Kiadott parancs: 
+
+     java -jar ./csv2rdf.jar --no-header ./template/template-no-header.ttl ./input/cars-no-header.csv .\output\result-no-header.ttl
+
+![](manualis_teszteles/no-header-run.png)
