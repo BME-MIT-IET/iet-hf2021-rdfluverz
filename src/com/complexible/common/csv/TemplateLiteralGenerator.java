@@ -21,7 +21,12 @@ public class TemplateLiteralGenerator extends TemplateValueGenerator<Literal> {
 
     public Literal generate(int rowIndex, String[] row) {
         String value = applyTemplate(rowIndex, row);
-        return datatype == null ? lang == null ? FACTORY.createLiteral(value) : FACTORY.createLiteral(value, lang)
-                : FACTORY.createLiteral(value, datatype);
+        if (datatype == null)
+            if (lang == null)
+                return FACTORY.createLiteral(value);
+            else
+                return FACTORY.createLiteral(value, lang);
+        else
+            return FACTORY.createLiteral(value, datatype);
     }
 }
