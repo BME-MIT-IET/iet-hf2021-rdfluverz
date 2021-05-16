@@ -12,20 +12,17 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CSV2RDFtest {
 
 	@Test
-	public void TesttoCharSingleCharacter() {
-		CSV2RDF csv2rdf = new CSV2RDF();
-		assertEquals('q', csv2rdf.toChar("q"));
+	public void testToCharSingleCharacter() {
+		assertEquals('q', CSV2RDF.toChar("q"));
 	}
 	
 	@Test
-	public void TesttoCharExceptionThrown() {
-		CSV2RDF csv2rdf = new CSV2RDF();
-		Exception exception = assertThrows(IllegalArgumentException.class, () -> csv2rdf.toChar("qwerty"));
-		
+	public void testToCharExceptionThrown() {
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> CSV2RDF.toChar("qwerty"));
 		assertEquals("Expecting a single character but got qwerty", exception.getMessage());
 	}
 	@Test
-	public void TestNot_FAIL_ON_UNKNOWN_DATATYPES_ConfigureSet(){
+	public void testNot_FAIL_ON_UNKNOWN_DATATYPES_ConfigureSet(){
 		ParserConfig config;
 		config = Template.getParserConfig();
 		boolean failToStart = config.get(BasicParserSettings.FAIL_ON_UNKNOWN_DATATYPES);
@@ -33,7 +30,7 @@ public class CSV2RDFtest {
 	}
 
 	@Test
-	public void TestNot_FAIL_ON_UNKNOWN_LANGUAGES_ConfigureSet(){
+	public void testNot_FAIL_ON_UNKNOWN_LANGUAGES_ConfigureSet(){
 		ParserConfig config;
 		config = Template.getParserConfig();
 		boolean failToStart = config.get(BasicParserSettings.FAIL_ON_UNKNOWN_LANGUAGES);
@@ -41,7 +38,7 @@ public class CSV2RDFtest {
 	}
 
 	@Test
-	public void TestNot_VERIFY_DATATYPE_VALUES_ConfigureSet(){
+	public void testNot_VERIFY_DATATYPE_VALUES_ConfigureSet(){
 		ParserConfig config;
 		config = Template.getParserConfig();
 		boolean failToStart = config.get(BasicParserSettings.VERIFY_DATATYPE_VALUES);
@@ -49,7 +46,7 @@ public class CSV2RDFtest {
 	}
 
 	@Test
-	public void TestNot_VERIFY_LANGUAGE_TAGS_ConfigureSet(){
+	public void testNot_VERIFY_LANGUAGE_TAGS_ConfigureSet(){
 		ParserConfig config;
 		config = Template.getParserConfig();
 		boolean failToStart = config.get(BasicParserSettings.VERIFY_LANGUAGE_TAGS);
@@ -57,7 +54,7 @@ public class CSV2RDFtest {
 	}
 
 	@Test
-	public void TestNot_VERIFY_RELATIVE_URIS_ConfigureSet(){
+	public void testNot_VERIFY_RELATIVE_URIS_ConfigureSet(){
 		ParserConfig config;
 		config = Template.getParserConfig();
 		boolean failToStart = config.get(BasicParserSettings.VERIFY_RELATIVE_URIS);
@@ -65,21 +62,21 @@ public class CSV2RDFtest {
 	}
 
 	@Test
-	public void TestRowNumberProvider(){
+	public void testRowNumberProvider(){
 		RowNumberProvider rowNumberProvider = new RowNumberProvider();
 		String[] string = {"aa", "bb"};
 		assertEquals("2", rowNumberProvider.provide(2, string));
 	}
 
 	@Test
-	public void TestRowValueProvider(){
+	public void testRowValueProvider(){
 		RowValueProvider rowValueProvider = new RowValueProvider(1);
 		String[] string = {"aa", "bb", "cc"};
 		assertEquals("bb", rowValueProvider.provide(2, string));
 	}
 
 	@Test
-	public void TestUUIDProviderForDifferentRowIndexes(){
+	public void testUUIDProviderForDifferentRowIndexes(){
 		UUIDProvider uuidProvider = new UUIDProvider();
 		String[] string = {"aa", "bb", "cc"};
 		String id1 = uuidProvider.provide(1, string);
@@ -88,7 +85,7 @@ public class CSV2RDFtest {
 	}
 
 	@Test
-	public void TestUUIDProviderForSameRowIndex(){
+	public void testUUIDProviderForSameRowIndex(){
 		UUIDProvider uuidProvider = new UUIDProvider();
 		String[] string = {"aa", "bb", "cc"};
 		String id1 = uuidProvider.provide(1, string);
@@ -97,7 +94,7 @@ public class CSV2RDFtest {
 	}
 
 	@Test
-	public void TestBNodeGeneratorForDifferentRowIndexes(){
+	public void testBNodeGeneratorForDifferentRowIndexes(){
 		BNodeGenerator bNodeGenerator = new BNodeGenerator();
 		String[] string = {"aa", "bb", "cc"};
 		BNode bNode1 = bNodeGenerator.generate(1, string);
@@ -106,7 +103,7 @@ public class CSV2RDFtest {
 	}
 
 	@Test
-	public void TestBNodeGeneratorForSameRowIndex(){
+	public void testBNodeGeneratorForSameRowIndex(){
 		BNodeGenerator bNodeGenerator = new BNodeGenerator();
 		String[] string = {"aa", "bb", "cc"};
 		BNode bNode1 = bNodeGenerator.generate(2, string);
