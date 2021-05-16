@@ -101,3 +101,32 @@ public void parseTemplate(List<String> cols, File templateFile, final RDFWriter 
 ## A "var" változónév lecserélése
 
 A sonarlint nem javasolta, hogy a változó elnevezése egyezzen a változók jelölésére használt `var` kóddal, így ezt átneveztük `variable`-re, mivel a rövidített elnevezés logikus volt, hiszen az template fájlon belül egy változót jelöl.
+
+## Unit Tesztek frissítése, korregálása
+Miután külön osztályokra bontottuk a `CSV2RDF` osztályt, a teszteket is frissíteni kellett ennek megfelelően. Kikerültek fölösleges változók és a statikus függvények már nem egy példányon, hanem az osztályon hívódnak meg.
+
+Emellett néhány függvény nevet is változtattunk, hogy a Java-s szokásoknak megfelelően kisbetűvel kezdődjenek.
+
+## Láthatóság változtatása, setter bevezetése
+Szükségtelenül `public` láthatóságú tagváltozót `private`-re cseréltünk, és kapott egy setter fügvényt (`ValueProdiver` class: `setIsHash(boolean isHash)`)
+
+## Nehezen olvasható logika felbontása
+**TemplateLiteralGenerator**
+
+Eredeti:
+```java
+return datatype == null ? lang == null ? FACTORY.createLiteral(value) : FACTORY.createLiteral(value, lang) : FACTORY.createLiteral(value, datatype);
+```
+Frissített:
+```java
+Literal literal;
+if(datatype == null){
+    if(lang == null)
+        literal = FACTORY.createLiteral(value);
+    else
+        literal = FACTORY.createLiteral(value, lang);
+    }
+else
+    literal = FACTORY.createLiteral(value, datatype);
+return literal;
+```
