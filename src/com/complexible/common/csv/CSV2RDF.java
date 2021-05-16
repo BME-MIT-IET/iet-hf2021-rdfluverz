@@ -125,12 +125,12 @@ public class CSV2RDF implements Runnable {
 		System.out.printf("Converted %,d rows to %,d triples%n", inputRows, outputTriples);
 	}
 
-	private static char toChar(String value) {
+	public static char toChar(String value) {
 		Preconditions.checkArgument(value.length() == 1, "Expecting a single character but got %s", value);
 		return value.charAt(0);
 	}
 
-	private static ParserConfig getParserConfig() {
+	public static ParserConfig getParserConfig() {
 		ParserConfig config = new ParserConfig();
 
 		Set<RioSetting<?>> aNonFatalErrors = Sets.<RioSetting<?>> newHashSet(
@@ -147,7 +147,7 @@ public class CSV2RDF implements Runnable {
 		return config;
 	}
 
-	private class Template {
+	public class Template {
 		private List<StatementGenerator> stmts = Lists.newArrayList();
 		private List<ValueProvider> valueProviders = Lists.newArrayList();
 
@@ -202,7 +202,7 @@ public class CSV2RDF implements Runnable {
 			return index == -1 ? null : new RowValueProvider(index);
 		}
 
-		private void parseTemplate(List<String> cols, File templateFile, final RDFWriter writer) throws Exception {
+		public void parseTemplate(List<String> cols, File templateFile, final RDFWriter writer) throws Exception {
 			String templateStr = insertPlaceholders(cols, templateFile);
 
 			RDFParser parser = Rio.createParser(RDFFormat.forFileName(templateFile.getName()));
@@ -256,7 +256,7 @@ public class CSV2RDF implements Runnable {
 					return generator;
 				}
 
-				private ValueProvider[] providersFor(String str) {
+				public ValueProvider[] providersFor(String str) {
 					List<ValueProvider> result = Lists.newArrayList();
 					for (ValueProvider provider : valueProviders) {
 						if (str.contains(provider.placeholder)) {
@@ -298,7 +298,7 @@ public class CSV2RDF implements Runnable {
 		}
 	}
 
-	private static abstract class ValueProvider {
+	public static abstract class ValueProvider {
 		 private final String placeholder = UUID.randomUUID().toString();
 		 private boolean isHash;
 
@@ -314,10 +314,10 @@ public class CSV2RDF implements Runnable {
 		 protected abstract String provideValue(int rowIndex, String[] row);
 	}
 
-	private static class RowValueProvider extends ValueProvider {
+	public static class RowValueProvider extends ValueProvider {
 		private final int colIndex;
 
-		private RowValueProvider(int colIndex) {
+		public RowValueProvider(int colIndex) {
 			this.colIndex = colIndex;
 		}
 
@@ -326,13 +326,13 @@ public class CSV2RDF implements Runnable {
 		}
 	}
 
-	private static class RowNumberProvider extends ValueProvider {
+	public static class RowNumberProvider extends ValueProvider {
 		protected String provideValue(int rowIndex, String[] row) {
 			return String.valueOf(rowIndex);
 		}
 	}
 
-	private static class UUIDProvider extends ValueProvider {
+	public static class UUIDProvider extends ValueProvider {
 		private String value = null;
 		private int generatedRow = -1;
 		
@@ -361,7 +361,7 @@ public class CSV2RDF implements Runnable {
 		}
 	}
 
-	private static class BNodeGenerator implements ValueGenerator<BNode> {
+	public static class BNodeGenerator implements ValueGenerator<BNode> {
 		private BNode value = null;
 		private int generatedRow = -1;
 
@@ -395,8 +395,8 @@ public class CSV2RDF implements Runnable {
 		}
 	}
 
-	private static class TemplateURIGenerator extends TemplateValueGenerator<URI> {
-		private TemplateURIGenerator(String template, ValueProvider[] providers) {
+	public static class TemplateURIGenerator extends TemplateValueGenerator<URI> {
+		public TemplateURIGenerator(String template, ValueProvider[] providers) {
 			super(template, providers);
 		}
 
