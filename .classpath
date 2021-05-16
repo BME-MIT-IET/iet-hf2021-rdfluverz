@@ -10,6 +10,13 @@
 	<classpathentry kind="lib" path="lib/openrdf-sesame-2.7.10-onejar.jar"/>
 	<classpathentry kind="lib" path="lib/javax.inject-1.jar"/>
 	<classpathentry kind="lib" path="lib/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="lib/junit-jupiter-5.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/junit-jupiter-api-5.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/junit-jupiter-engine-5.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/junit-jupiter-params-5.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/junit-platform-commons-1.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/junit-platform-engine-1.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/junit-platform-launcher-1.7.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
