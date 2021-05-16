@@ -85,7 +85,7 @@ A sonarlint több helyen jelzete, hogy ```System.out``` és ```System.err``` has
 Két fájlban is javasolta a sonarlint a ```com.google.common.base.Charsets.UTF_8``` import lecserélését a ```StandardCharsets.UTF_8``` importra, ezeket lecseréltük.
 
 ## Függvényszignatúrák throws Exception része
-A sonarlint több helyen hibajelzést adott, hogy a generikus Exception helyett a függvényszignatúrákba érdemes lenne beépíteni az ott dobott kivételek specifikus típusát.
+A sonarlint több helyen hibajelzést adott, hogy a generikus `throws Exception` helyett a függvényszignatúrákba érdemes lenne beépíteni az ott dobott kivételek specifikus típusát.
 Ez olyan esetben, ahol a függvény saját maga állítja elő a kivételeket és nem a benne hívott függvények kivételeit dobja tovább érdemes lenne, illetve, ha az osztályt olyan környezetben használnánk, ahol a kivételeket kezeljük.
 Mivel a program kivételkezelése néhány funkcionális eset kivételével annyiban kimerül, hogy a kivétel StackTrace-ét kiírja, illetve a függvények közül volt olyan, amelyikben 10 féle kivétel keletkezhet, úgy döntöttünk, hogy a kód olvashatósága érdekében ezt a figyelmeztetést figyelmen kívül hagyjuk.
 
@@ -100,4 +100,4 @@ public void parseTemplate(List<String> cols, File templateFile, final RDFWriter 
 
 ## A "var" változónév lecserélése
 
-A sonarlint nem javasolta, hogy a változó elnevezése egyezzen a változók jelölésére használt kóddal, így ezt átneveztük variable-re, mivel a rövidített elnevezés logikus volt, hiszen az template fájlon belül egy változót jelöl.
+A sonarlint nem javasolta, hogy a változó elnevezése egyezzen a változók jelölésére használt `var` kóddal, így ezt átneveztük `variable`-re, mivel a rövidített elnevezés logikus volt, hiszen az template fájlon belül egy változót jelöl.
