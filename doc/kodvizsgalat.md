@@ -1,7 +1,13 @@
 # Kódvizsgálat:
 ## Osztályok vizsgálata
 
-A program egyetlen fő osztályból áll, a többi osztály ennek belső osztályaként van jelen. Habár ez megakadályozza a többi osztály használatát a fő oszályon kívül, a kódot szükségtelenül komplexszé és nehezen olvashatóvá teszi.
+A program egyetlen fő osztályból áll, a többi osztály ennek belső osztályaként van jelen.
+Habár ez megakadályozza a többi osztály használatát a fő oszályon kívül, a kódot szükségtelenül komplexszé és nehezen olvashatóvá teszi.
+A továbbiakban az eredeti kódról készített elemzés található.
+
+Úgy döntöttünk, hogy az olvashatóság érdekében a kód belső osztályait kiszervezzük külön fájlokba, önálló osztályokra.
+Ehhez szükség volt az osztályok illetve néhány változó láthatóságának módosítására, de ezen felül lényegi változtatás nem történt.
+Az osztályok legmegfelelőbb láthatóság beállítása package-private lenne, de a unit tesztek miatt szükséges a public szint.
 
 ##  1. CSV2RDF
 
@@ -77,3 +83,21 @@ A sonarlint több helyen jelzete, hogy ```System.out``` és ```System.err``` has
 
 ## Charsets.UTF_8 lecserélése StandardCharsets.UTF_8-ra
 Két fájlban is javasolta a sonarlint a ```com.google.common.base.Charsets.UTF_8``` import lecserélését a ```StandardCharsets.UTF_8``` importra, ezeket lecseréltük.
+
+## Függvényszignatúrák throws Exception része
+A sonarlint több helyen hibajelzést adott, hogy a generikus Exception helyett a függvényszignatúrákba érdemes lenne beépíteni az ott dobott kivételek specifikus típusát.
+Ez olyan esetben, ahol a függvény saját maga állítja elő a kivételeket és nem a benne hívott függvények kivételeit dobja tovább érdemes lenne, illetve, ha az osztályt olyan környezetben használnánk, ahol a kivételeket kezeljük.
+Mivel a program kivételkezelése néhány funkcionális eset kivételével annyiban kimerül, hogy a kivétel StackTrace-ét kiírja, illetve a függvények közül volt olyan, amelyikben 10 féle kivétel keletkezhet, úgy döntöttünk, hogy a kód olvashatósága érdekében ezt a figyelmeztetést figyelmen kívül hagyjuk.
+
+Egy példa arra, hogyha a hívott függvényekben keletkező összes kivételt felsorolnánk: 
+
+```java
+public void parseTemplate(List<String> cols, File templateFile, final RDFWriter writer) throws IOException, IllegalStateException, IndexOutOfBoundsException, IllegalArgumentException, UnsupportedRDFormatException, RDFHandlerException, ClassCastException, NullPointerException, UnsupportedOperationException, RDFParseException
+{
+    //...
+}
+```
+
+## A "var" változónév lecserélése
+
+A sonarlint nem javasolta, hogy a változó elnevezése egyezzen a változók jelölésére használt kóddal, így ezt átneveztük variable-re, mivel a rövidített elnevezés logikus volt, hiszen az template fájlon belül egy változót jelöl.
