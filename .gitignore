@@ -2,3 +2,6 @@
 /bin
 /build
 /dist
+/*.iml
+/.idea/
+/src/META-INF/

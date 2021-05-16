@@ -1,8 +1,8 @@
 package test;
 
+import com.complexible.common.csv.*;
 import org.junit.jupiter.api.Test;
 
-import com.complexible.common.csv.CSV2RDF;
 import org.openrdf.model.BNode;
 import org.openrdf.rio.ParserConfig;
 import org.openrdf.rio.helpers.BasicParserSettings;
@@ -12,80 +12,72 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CSV2RDFtest {
 
 	@Test
-	public void TesttoCharSingleCharacter() {
-		CSV2RDF csv2rdf = new CSV2RDF();
-		assertEquals('q', csv2rdf.toChar("q"));
+	public void testToCharSingleCharacter() {
+		assertEquals('q', CSV2RDF.toChar("q"));
 	}
 	
 	@Test
-	public void TesttoCharExceptionThrown() {
-		CSV2RDF csv2rdf = new CSV2RDF();
-		Exception exception = assertThrows(IllegalArgumentException.class, () -> csv2rdf.toChar("qwerty"));
-		
+	public void testToCharExceptionThrown() {
+		Exception exception = assertThrows(IllegalArgumentException.class, () -> CSV2RDF.toChar("qwerty"));
 		assertEquals("Expecting a single character but got qwerty", exception.getMessage());
 	}
 	@Test
-	public void TestNot_FAIL_ON_UNKNOWN_DATATYPES_ConfigureSet(){
-		CSV2RDF csv2rdf = new CSV2RDF();
+	public void testNot_FAIL_ON_UNKNOWN_DATATYPES_ConfigureSet(){
 		ParserConfig config;
-		config = csv2rdf.getParserConfig();
+		config = Template.getParserConfig();
 		boolean failToStart = config.get(BasicParserSettings.FAIL_ON_UNKNOWN_DATATYPES);
 		assertEquals(false, failToStart);
 	}
 
 	@Test
-	public void TestNot_FAIL_ON_UNKNOWN_LANGUAGES_ConfigureSet(){
-		CSV2RDF csv2rdf = new CSV2RDF();
+	public void testNot_FAIL_ON_UNKNOWN_LANGUAGES_ConfigureSet(){
 		ParserConfig config;
-		config = csv2rdf.getParserConfig();
+		config = Template.getParserConfig();
 		boolean failToStart = config.get(BasicParserSettings.FAIL_ON_UNKNOWN_LANGUAGES);
 		assertEquals(false, failToStart);
 	}
 
 	@Test
-	public void TestNot_VERIFY_DATATYPE_VALUES_ConfigureSet(){
-		CSV2RDF csv2rdf = new CSV2RDF();
+	public void testNot_VERIFY_DATATYPE_VALUES_ConfigureSet(){
 		ParserConfig config;
-		config = csv2rdf.getParserConfig();
+		config = Template.getParserConfig();
 		boolean failToStart = config.get(BasicParserSettings.VERIFY_DATATYPE_VALUES);
 		assertEquals(false, failToStart);
 	}
 
 	@Test
-	public void TestNot_VERIFY_LANGUAGE_TAGS_ConfigureSet(){
-		CSV2RDF csv2rdf = new CSV2RDF();
+	public void testNot_VERIFY_LANGUAGE_TAGS_ConfigureSet(){
 		ParserConfig config;
-		config = csv2rdf.getParserConfig();
+		config = Template.getParserConfig();
 		boolean failToStart = config.get(BasicParserSettings.VERIFY_LANGUAGE_TAGS);
 		assertEquals(false, failToStart);
 	}
 
 	@Test
-	public void TestNot_VERIFY_RELATIVE_URIS_ConfigureSet(){
-		CSV2RDF csv2rdf = new CSV2RDF();
+	public void testNot_VERIFY_RELATIVE_URIS_ConfigureSet(){
 		ParserConfig config;
-		config = csv2rdf.getParserConfig();
+		config = Template.getParserConfig();
 		boolean failToStart = config.get(BasicParserSettings.VERIFY_RELATIVE_URIS);
 		assertEquals(false, failToStart);
 	}
 
 	@Test
-	public void TestRowNumberProvider(){
-		CSV2RDF.RowNumberProvider rowNumberProvider = new CSV2RDF.RowNumberProvider();
+	public void testRowNumberProvider(){
+		RowNumberProvider rowNumberProvider = new RowNumberProvider();
 		String[] string = {"aa", "bb"};
 		assertEquals("2", rowNumberProvider.provide(2, string));
 	}
 
 	@Test
-	public void TestRowValueProvider(){
-		CSV2RDF.RowValueProvider rowValueProvider = new CSV2RDF.RowValueProvider(1);
+	public void testRowValueProvider(){
+		RowValueProvider rowValueProvider = new RowValueProvider(1);
 		String[] string = {"aa", "bb", "cc"};
 		assertEquals("bb", rowValueProvider.provide(2, string));
 	}
 
 	@Test
-	public void TestUUIDProviderForDifferentRowIndexes(){
-		CSV2RDF.UUIDProvider uuidProvider = new CSV2RDF.UUIDProvider();
+	public void testUUIDProviderForDifferentRowIndexes(){
+		UUIDProvider uuidProvider = new UUIDProvider();
 		String[] string = {"aa", "bb", "cc"};
 		String id1 = uuidProvider.provide(1, string);
 		String id2 = uuidProvider.provide(2, string);
@@ -93,8 +85,8 @@ public class CSV2RDFtest {
 	}
 
 	@Test
-	public void TestUUIDProviderForSameRowIndex(){
-		CSV2RDF.UUIDProvider uuidProvider = new CSV2RDF.UUIDProvider();
+	public void testUUIDProviderForSameRowIndex(){
+		UUIDProvider uuidProvider = new UUIDProvider();
 		String[] string = {"aa", "bb", "cc"};
 		String id1 = uuidProvider.provide(1, string);
 		String id2 = uuidProvider.provide(1, string);
@@ -102,8 +94,8 @@ public class CSV2RDFtest {
 	}
 
 	@Test
-	public void TestBNodeGeneratorForDifferentRowIndexes(){
-		CSV2RDF.BNodeGenerator bNodeGenerator = new CSV2RDF.BNodeGenerator();
+	public void testBNodeGeneratorForDifferentRowIndexes(){
+		BNodeGenerator bNodeGenerator = new BNodeGenerator();
 		String[] string = {"aa", "bb", "cc"};
 		BNode bNode1 = bNodeGenerator.generate(1, string);
 		BNode bNode2 = bNodeGenerator.generate(2, string);
@@ -111,8 +103,8 @@ public class CSV2RDFtest {
 	}
 
 	@Test
-	public void TestBNodeGeneratorForSameRowIndex(){
-		CSV2RDF.BNodeGenerator bNodeGenerator = new CSV2RDF.BNodeGenerator();
+	public void testBNodeGeneratorForSameRowIndex(){
+		BNodeGenerator bNodeGenerator = new BNodeGenerator();
 		String[] string = {"aa", "bb", "cc"};
 		BNode bNode1 = bNodeGenerator.generate(2, string);
 		BNode bNode2 = bNodeGenerator.generate(2, string);
