@@ -2,3 +2,6 @@
 /bin
 /build
 /dist
+/csv2rdf.iml
+/.idea/
+/src/META-INF/
