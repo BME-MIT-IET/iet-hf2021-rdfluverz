@@ -19,7 +19,7 @@ A további osztályok ennek belső osztályai.
 
     Az oszlopváltozók nevei/indexei alapján megfelelő típusú ValueProvidereket hoz létre.
 
-- parseTemplatew
+- parseTemplate
 
     Ez a függvény dolgozza fel a template fájlt a Template osztály létrehozásakor az insertPlaceholders segítségével.
     Továbbá létrehoz egy RDFHandler-t is, ami értelmezi és kezeli a névtereket, illetvekésőbb kezeki a létrehozott állításokat és azokból rdf fájlt készít.
