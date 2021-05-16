@@ -43,7 +43,7 @@ public class Template {
             String varName = variable.substring(2, variable.length() - 1);
             ValueProvider valueProvider = valueProviderFor(varName, cols);
             Preconditions.checkArgument(valueProvider != null, "Invalid template variable", variable);
-            valueProvider.isHash = (variable.charAt(0) == '#');
+            valueProvider.setIsHash(variable.charAt(0) == '#');
             m.appendReplacement(sb, valueProvider.placeholder);
             valueProviders.add(valueProvider);
         }
@@ -174,5 +174,4 @@ public class Template {
     public int getOutputTriples() {
         return outputTriples;
     }
-
 }

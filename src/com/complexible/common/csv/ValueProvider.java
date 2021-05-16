@@ -12,7 +12,7 @@ public abstract class ValueProvider {
     private static final Charset OUTPUT_CHARSET = StandardCharsets.UTF_8;
 
     public final String placeholder = UUID.randomUUID().toString();
-    public boolean isHash;
+    private boolean isHash;
 
     public String provide(int rowIndex, String[] row) {
         String value = provideValue(rowIndex, row);
@@ -22,6 +22,8 @@ public abstract class ValueProvider {
         }
         return value;
     }
+
+    public void setIsHash(boolean isHash){ this.isHash = isHash; }
 
     protected abstract String provideValue(int rowIndex, String[] row);
 }
