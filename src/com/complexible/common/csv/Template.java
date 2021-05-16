@@ -39,11 +39,11 @@ public class Template {
         Matcher m = p.matcher(Files.toString(templateFile, INPUT_CHARSET));
         StringBuffer sb = new StringBuffer();
         while (m.find()) {
-            String var = m.group(1);
-            String varName = var.substring(2, var.length() - 1);
+            String variable = m.group(1);
+            String varName = variable.substring(2, variable.length() - 1);
             ValueProvider valueProvider = valueProviderFor(varName, cols);
-            Preconditions.checkArgument(valueProvider != null, "Invalid template variable", var);
-            valueProvider.isHash = (var.charAt(0) == '#');
+            Preconditions.checkArgument(valueProvider != null, "Invalid template variable", variable);
+            valueProvider.isHash = (variable.charAt(0) == '#');
             m.appendReplacement(sb, valueProvider.placeholder);
             valueProviders.add(valueProvider);
         }
