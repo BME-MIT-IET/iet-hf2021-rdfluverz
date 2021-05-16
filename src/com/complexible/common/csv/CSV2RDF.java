@@ -94,7 +94,7 @@ public class CSV2RDF implements Runnable {
         System.out.printf("Converted %,d rows to %,d triples%n", inputRows, outputTriples);
     }
 
-    private static char toChar(String value) {
+    public static char toChar(String value) {
         Preconditions.checkArgument(value.length() == 1, "Expecting a single character but got %s", value);
         return value.charAt(0);
     }

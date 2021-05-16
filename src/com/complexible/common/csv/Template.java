@@ -78,7 +78,7 @@ public class Template {
         return index == -1 ? null : new RowValueProvider(index);
     }
 
-    private void parseTemplate(List<String> cols, File templateFile, final RDFWriter writer) throws Exception {
+    public void parseTemplate(List<String> cols, File templateFile, final RDFWriter writer) throws Exception {
         String templateStr = insertPlaceholders(cols, templateFile);
 
         RDFParser parser = Rio.createParser(RDFFormat.forFileName(templateFile.getName()));
@@ -150,7 +150,7 @@ public class Template {
             handler.handleStatement(stmt.generate(inputRows, row));
         }
     }
-    private static ParserConfig getParserConfig() {
+    public static ParserConfig getParserConfig() {
         ParserConfig config = new ParserConfig();
 
         Set<RioSetting<?>> aNonFatalErrors = Sets.<RioSetting<?>>newHashSet(
