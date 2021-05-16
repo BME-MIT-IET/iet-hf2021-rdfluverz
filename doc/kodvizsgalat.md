@@ -67,3 +67,13 @@ A sorból kinyert adat helyett a sor sorszámát adja meg.
 ## 5. StatementGenerator
 
 A ValueGeneratorok segítségével összeállítja az rdf adatbázis 3-as állításait.
+
+# Statikus Analízis
+
+A statikus analízishez sonarlintet használtunk, a sonarcloudot engedély hiányában nem tudtuk beállítani.
+
+## System.out és System.err lecserélése loggerre
+A sonarlint több helyen jelzete, hogy ```System.out``` és ```System.err``` használata helyett inkább logger-t kéne használni, ezeket lecseréltük.
+
+## Charsets.UTF_8 lecserélése StandardCharsets.UTF_8-ra
+Két fájlban is javasolta a sonarlint a ```com.google.common.base.Charsets.UTF_8``` import lecserélését a ```StandardCharsets.UTF_8``` importra, ezeket lecseréltük.
